@@ -6,7 +6,7 @@ export function ChatThread() {
   return (
     <div className="space-y-8">
       <MessageBubble role="assistant" time="Today, 10:42 AM">
-        <p>Hello! I’m your claudIA assistant. I can help you monitor systems, debug issues, and analyze performance data. What would you like to check today?</p>
+        <p>Hello! I’m claudIA your observability assistant. I can help you monitor systems, debug issues, and analyze performance data. What would you like to check today?</p>
         <div className="mt-3 space-y-3">
           <div className="p-3 bg-[#273041] rounded-md border border-[var(--border)]">
             <h4 className="text-sm font-medium text-white mb-1">Quick Actions</h4>

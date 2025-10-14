@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   title: 'claudIA — Observability Assistant',
-  description: 'An Apple/ChatGPT-clean, dark-first UI for AI-powered observability.',
+  description: 'Clean UI for AI-powered observability.',
   icons: { icon: '/favicon.svg' }
 }
 

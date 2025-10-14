@@ -27,7 +27,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </div>
               <nav className="hidden md:flex gap-1">
                 <a className="px-3 py-2 text-sm font-medium rounded-md bg-[#1e2530] text-white" href="#">Console</a>
-                <a className="px-3 py-2 text-sm font-medium rounded-md text-[#9AA3AE] hover:text-white hover:bg-[#1e2530]" href="#">Playbooks</a>
+                <a className="px-3 py-2 text-sm font-medium rounded-md text-[#9AA3AE] hover:text-white hover:bg-[#1e2530]" href="#">Projects</a>
                 <a className="px-3 py-2 text-sm font-medium rounded-md text-[#9AA3AE] hover:text-white hover:bg-[#1e2530]" href="#">Settings</a>
               </nav>
             </div>
@@ -38,8 +38,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <Bell className="w-4 h-4" />
               </button>
               <button className="flex items-center gap-2 text-sm font-medium hover:bg-[#1e2530] rounded-full p-1 pr-2 focus-ring" aria-label="Profile menu">
-                <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-white text-xs font-bold">JD</div>
-                <span className="hidden md:inline">John Doe</span>
+                <div className="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-white text-xs font-bold">AN</div>
+                <span className="hidden md:inline">Adrian Najera</span>
                 <ChevronDown className="w-4 h-4" />
               </button>
             </div>
