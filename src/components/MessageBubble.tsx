@@ -3,30 +3,47 @@
 export function MessageBubble({
   role,
   children,
-  time
+  time,
 }: {
   role: 'assistant' | 'user';
   children: React.ReactNode;
   time?: string;
 }) {
   const isUser = role === 'user';
+
   return (
-    <div className={`max-w-3xl mx-auto ${isUser ? 'justify-end flex' : ''}`}>
-      <div className={`flex items-start gap-3 ${isUser ? 'flex-row-reverse' : ''}`}>
-        <div className={`flex-shrink-0 w-8 h-8 rounded-full ${isUser ? 'bg-[#273041]' : 'bg-brand'} flex items-center justify-center text-white`}>
-          {isUser ? 'U' : 'AI'}
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className={`${isUser ? 'bg-brand' : 'bg-[#1e2530]'} rounded-lg p-4`}>
-            <div className="text-white">{children}</div>
-          </div>
-          {time && (
-            <div className={`mt-2 flex items-center text-xs text-[#9AA3AE] ${isUser ? 'justify-end' : ''}`}>
-              <span>{time}</span>
-            </div>
-          )}
+    <div className="w-full">
+      {/* Align vertically so timestamps stay closer */}
+      <div
+        className={`flex ${isUser ? 'justify-end' : 'justify-start'} items-end`}
+      >
+        <div
+          className={[
+            'rounded-2xl',
+            'px-4',
+            'py-3',
+            'text-sm',
+            'leading-relaxed',
+            'border',
+            isUser
+              ? 'bg-[#0A6DE6] text-white border-transparent'
+              : 'bg-[#1E2530] text-[var(--text)] border-[var(--border)]',
+            'max-w-full',
+          ].join(' ')}
+        >
+          {children}
         </div>
       </div>
+
+      {time && (
+        <div
+          className={`text-xs text-gray-500 ${
+            isUser ? 'text-right pr-1 mt-1.5' : 'text-left pl-1 mt-1.5'
+          }`}
+        >
+          {time}
+        </div>
+      )}
     </div>
-  )
+  );
 }

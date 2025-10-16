@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   darkMode: ['class'],
@@ -21,15 +21,15 @@ const config: Config = {
           600: '#0858B8',
           700: '#06428B',
           800: '#042D5D',
-          900: '#02182F'
+          900: '#02182F',
         },
         surface: { bg: '#0B0D10', panel: '#121418', border: '#1F242B' },
-        textc: { base: '#E6E9EE', muted: '#A9B0BA' }
+        textc: { base: '#E6E9EE', muted: '#A9B0BA' },
       },
       borderRadius: { xl: '20px', lg: '16px', md: '12px', sm: '8px' },
-      boxShadow: { soft: '0 8px 24px rgba(0,0,0,.35)' }
+      boxShadow: { soft: '0 8px 24px rgba(0,0,0,.35)' },
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;

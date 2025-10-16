@@ -30,6 +30,5 @@ tailwind.config.ts → Tailwind theme configuration
 
 Requirements
 
-* Node.js v20+
-* npm v10+
-
+- Node.js v20+
+- npm v10+

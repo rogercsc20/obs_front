@@ -9,21 +9,31 @@ import { PromptBar } from '@/components/PromptBar';
 export default function Home() {
   return (
     <AppShell>
-      <div className="flex flex-1 overflow-hidden">
-        <aside className="w-64 border-r border-[var(--border)] bg-[var(--panel)] hidden md:block overflow-y-auto">
+      <div className="flex h-[calc(100vh-4rem)] overflow-hidden">
+        {/* LEFT SIDEBAR */}
+        <aside className="w-64 flex-shrink-0 border-r border-[var(--border)] bg-[var(--panel)] hidden md:flex flex-col overflow-y-auto sidebar-scroll">
           <SidebarSources />
         </aside>
 
+        {/* CENTER CHAT */}
         <main className="flex-1 flex flex-col overflow-hidden">
-          <div className="flex-1 overflow-y-auto p-6">
-            <ChatThread />
+          {/* CHAT THREAD */}
+          <div className="flex-1 overflow-y-auto px-6 py-8 chat-scroll flex justify-center">
+            <div className="w-full max-w-3xl">
+              <ChatThread />
+            </div>
           </div>
-          <div className="border-t border-[var(--border)] bg-[var(--panel)]">
-            <PromptBar />
+
+          {/* FLOATING PROMPT */}
+          <div className="sticky bottom-6 w-full flex justify-center">
+            <div className="w-full max-w-3xl px-6">
+              <PromptBar />
+            </div>
           </div>
         </main>
 
-        <aside className="w-80 border-l border-[var(--border)] bg-[var(--panel)] hidden lg:block overflow-y-auto">
+        {/* RIGHT SIDEBAR */}
+        <aside className="w-80 flex-shrink-0 border-l border-[var(--border)] bg-[var(--panel)] hidden lg:flex flex-col overflow-y-auto sidebar-scroll">
           <InsightPanel />
         </aside>
       </div>

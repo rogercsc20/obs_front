@@ -1,21 +1,25 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { Inter } from 'next/font/google'
+import type { Metadata } from 'next';
+import './globals.css';
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   title: 'claudIA — Observability Assistant',
   description: 'Clean UI for AI-powered observability.',
-  icons: { icon: '/favicon.svg' }
-}
+  icons: { icon: '/favicon.svg' },
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} min-h-screen flex flex-col`}>
         {children}
       </body>
     </html>
-  )
+  );
 }

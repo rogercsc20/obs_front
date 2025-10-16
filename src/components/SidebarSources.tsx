@@ -6,8 +6,13 @@ export function SidebarSources() {
   return (
     <div className="p-4">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-sm font-semibold text-[#9AA3AE] uppercase tracking-wider">Sources</h2>
-        <button aria-label="Add source" className="text-[#9AA3AE] hover:text-white focus-ring">
+        <h2 className="text-sm font-semibold text-[#9AA3AE] uppercase tracking-wider">
+          Sources
+        </h2>
+        <button
+          aria-label="Add source"
+          className="text-[#9AA3AE] hover:text-white focus-ring"
+        >
           <Plus className="w-4 h-4" />
         </button>
       </div>
@@ -24,8 +29,12 @@ export function SidebarSources() {
           </div>
         </div>
         <div className="flex gap-2">
-          <button className="px-3 py-1 text-xs font-medium rounded-full bg-[#1e2530] text-white">Active</button>
-          <button className="px-3 py-1 text-xs font-medium rounded-full bg-[#1e2530] text-[#9AA3AE] hover:text-white">All</button>
+          <button className="px-3 py-1 text-xs font-medium rounded-full bg-[#1e2530] text-white">
+            Active
+          </button>
+          <button className="px-3 py-1 text-xs font-medium rounded-full bg-[#1e2530] text-[#9AA3AE] hover:text-white">
+            All
+          </button>
         </div>
       </div>
 
@@ -37,9 +46,14 @@ export function SidebarSources() {
           { name: 'analytics', tag: 'Snowflake', status: 'ok' },
           { name: 'logging', tag: 'Elastic', status: 'ok' },
         ].map((s) => (
-          <div key={s.name} className="p-2 rounded-md hover:bg-[#1e2530] cursor-pointer flex items-center justify-between">
+          <div
+            key={s.name}
+            className="p-2 rounded-md hover:bg-[#1e2530] cursor-pointer flex items-center justify-between"
+          >
             <div className="flex items-center">
-              <span className={`w-2 h-2 rounded-full mr-3 ${s.status === 'ok' ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
+              <span
+                className={`w-2 h-2 rounded-full mr-3 ${s.status === 'ok' ? 'bg-emerald-500' : 'bg-amber-500'}`}
+              ></span>
               <span className="text-sm font-medium">{s.name}</span>
             </div>
             <span className="text-xs text-[#9AA3AE]">{s.tag}</span>
@@ -47,5 +61,5 @@ export function SidebarSources() {
         ))}
       </div>
     </div>
-  )
+  );
 }
