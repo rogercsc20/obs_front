@@ -4,11 +4,14 @@ import { Bell, ChevronDown } from 'lucide-react';
 import { ChatThread } from './ChatThread';
 import { SidebarSources } from './SidebarSources';
 import { InsightPanel } from './InsightPanel';
-import PromptBar, { PromptBarHandle } from './PromptBar';
-import { useRef } from 'react';
+import PromptBar from './PromptBar';
+import { useThreadContext } from '@/lib/useThreadContext';
 
 export function AppShell() {
-  const promptBarRef = useRef<PromptBarHandle>(null);
+  const { messages } = useThreadContext();
+
+  // Determines if only the intro assistant message is present (landing state)
+  const isLandingState = messages.length === 0;
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
@@ -83,16 +86,36 @@ export function AppShell() {
         </aside>
 
         {/* CENTER CONTENT */}
-        <section className="relative flex flex-col flex-1 overflow-hidden">
-          {/* CHAT THREAD */}
-          <div className="flex-1 overflow-y-auto pb-36">
-            <ChatThread />
-          </div>
-
-          {/* PROMPT BAR */}
-          <div className="absolute bottom-10 left-0 right-0 px-6">
-            <PromptBar />
-          </div>
+        <section className="relative flex flex-col flex-1 min-h-0 overflow-hidden">
+          {isLandingState ? (
+            // -- LANDING: centered welcome and prompt bar --
+            <div className="flex flex-col items-center justify-center h-full w-full px-0">
+              <div className="w-full flex flex-col items-center gap-6">
+                <div className="text-center">
+                  <h1 className="text-4xl font-semibold text-white mb-3">
+                    Hey Adrian, can I help you troubleshoot?
+                  </h1>
+                </div>
+                <div className="w-full flex justify-center">
+                  <div className="w-full max-w-xl">
+                  <PromptBar />
+                </div>
+               </div>
+              </div>
+            </div>
+          ) : (
+            // -- CHAT MODE: scrollable thread + sticky prompt bar at the absolute bottom --
+            <>
+              <div className="flex-1 min-h-0 overflow-y-auto chat-scroll px-0 pt-6 flex flex-col bg-transparent pb-28">
+                <ChatThread />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 pb-6 flex justify-center bg-gradient-to-t from-[#101116]/80 to-transparent pointer-events-none z-20">
+                <div className="w-full px-6 pointer-events-auto">
+                  <PromptBar />
+                </div>
+              </div>
+            </>
+          )}
         </section>
 
         {/* RIGHT SIDEBAR */}

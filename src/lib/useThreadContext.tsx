@@ -18,33 +18,8 @@ export type ThreadContextType = {
 const ThreadContext = createContext<ThreadContextType | undefined>(undefined);
 
 export function ThreadProvider({ children }: { children: ReactNode }) {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: (
-        <>
-          <p>Hi, I’m ClaudIA. I can help you explore log insights in real-time.</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {[
-              'Check service health',
-              'Show me recent failures',
-              'Compare latency by region',
-              'List root causes',
-            ].map((text) => (
-              <button
-                key={text}
-                className="px-3 py-1 text-xs bg-[#1e2530] hover:bg-[#334155] rounded-md"
-                onClick={() => sendQuery(text)}
-              >
-                {text}
-              </button>
-            ))}
-          </div>
-        </>
-      ),
-      time: 'Today 10:42 AM',
-    },
-  ]);
+  // Start with just one assistant message to maintain "landing state"
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const sendQuery = async (query: string) => {
     const userMessage = { role: 'user', content: query };
