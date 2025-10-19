@@ -1,87 +1,82 @@
 'use client';
 
-import { MessageBubble } from './MessageBubble';
+import { useThreadContext } from '@/lib/useThreadContext';
+import { useEffect, useRef } from 'react';
 
 export function ChatThread() {
-  return (
-    <div className="chat-scroll overflow-y-auto flex-1 px-4 pb-28 flex flex-col items-center">
-      <div className="w-full max-w-3xl space-y-8">
-        <MessageBubble role="assistant" time="Today, 10:42 AM">
-          <p>
-            Hello! I’m claudIA, your observability assistant. I can help you monitor systems,
-            debug issues, and analyze performance data. What would you like to check today?
-          </p>
+  const { messages, sendQuery } = useThreadContext();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-          <div className="mt-3 space-y-3">
-            <div className="p-3 bg-[#273041] rounded-md border border-[var(--border)]">
-              <h4 className="text-sm font-medium text-white mb-1">Quick Actions</h4>
-              <div className="flex flex-wrap gap-2">
-                {['Check service health', 'Show recent errors', 'Analyze latency', 'Payment failures'].map(b => (
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
+  }, [messages]);
+
+  const quickQueries = [
+    'Check system health',
+    'Show recent errors',
+    'Compare latency by region',
+    'List root causes',
+  ];
+
+  const handleQuickQuery = (query: string) => {
+    sendQuery(query);
+  };
+
+  return (
+    <div
+      ref={scrollRef}
+      className="chat-scroll overflow-y-auto flex-1 px-4 pt-6 flex flex-col items-center bg-transparent"
+    >
+      <div className="w-full max-w-3xl flex flex-col gap-6 min-h-[80vh] pb-40 transition-all duration-300">
+        {/* Empty state */}
+        {messages.length === 0 && (
+          <div className="text-center text-[#94a3b8] text-sm pt-32">
+            Ask <span className="text-white font-medium">ClaudIA</span> anything about your
+            infrastructure, systems, or performance.
+          </div>
+        )}
+
+        {/* Intro assistant bubble */}
+        {messages.length === 0 && (
+          <div className="flex justify-start">
+            <div className="rounded-3xl px-6 py-4 bg-[rgba(60,75,110,0.6)] border border-[rgba(78,136,255,0.25)] text-white backdrop-blur-md shadow-[0_0_20px_rgba(78,136,255,0.15)] transition-all duration-200">
+              <p className="text-sm leading-relaxed">
+                Hi, I’m <strong>ClaudIA</strong>. I can help you explore log insights in real-time.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {quickQueries.map((q) => (
                   <button
-                    key={b}
-                    className="px-3 py-1 text-xs bg-[#1e2530] hover:bg-[#334155] rounded-md"
+                    key={q}
+                    onClick={() => handleQuickQuery(q)}
+                    className="px-4 py-1.5 text-xs rounded-full bg-[#1e2530] hover:bg-[#334155] hover:text-white text-[#cbd5e1] transition-all duration-150 border border-transparent hover:border-[rgba(78,136,255,0.4)] shadow-sm"
                   >
-                    {b}
+                    {q}
                   </button>
                 ))}
               </div>
             </div>
           </div>
-        </MessageBubble>
+        )}
 
-        <MessageBubble role="user" time="Today, 10:43 AM">
-          Show me the latency spikes in the last hour
-        </MessageBubble>
-
-        <MessageBubble role="assistant" time="Today, 10:43 AM">
-          <p>
-            I’ve analyzed the latency metrics across your services in the last hour.
-            Here’s what I found:
-          </p>
-
-          <div className="mt-3 bg-[#273041] rounded-md border border-[var(--border)] overflow-hidden">
-            <div className="p-3 border-b border-[var(--border)]">
-              <h4 className="text-sm font-medium text-white">
-                Latency Analysis (last 60 minutes)
-              </h4>
-            </div>
-            <div className="p-3 grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <p className="text-[#9AA3AE]">Average latency</p>
-                <p className="text-white font-medium">142ms</p>
-              </div>
-              <div>
-                <p className="text-[#9AA3AE]">Peak latency</p>
-                <p className="text-white font-medium">
-                  892ms <span className="text-rose-400">(+528%)</span>
-                </p>
-              </div>
-              <div>
-                <p className="text-[#9AA3AE]">Spike occurrences</p>
-                <p className="text-white font-medium">8</p>
-              </div>
-              <div>
-                <p className="text-[#9AA3AE]">Most affected service</p>
-                <p className="text-white font-medium">checkout-api</p>
-              </div>
+        {/* Render dynamic messages */}
+        {messages.map((msg, idx) => (
+          <div
+            key={idx}
+            className={`flex ${
+              msg.role === 'user' ? 'justify-end' : 'justify-start'
+            } transition-all duration-200`}
+          >
+            <div
+              className={`rounded-3xl px-5 py-3 max-w-[80%] text-sm leading-relaxed shadow-[0_4px_20px_rgba(0,0,0,0.25)] ${
+                msg.role === 'user'
+                  ? 'bg-[#4e88ff] text-white rounded-br-none shadow-[0_0_15px_rgba(78,136,255,0.4)]'
+                  : 'bg-[rgba(53,63,89,0.65)] backdrop-blur-md text-white border border-[rgba(78,136,255,0.25)] rounded-bl-none'
+              }`}
+            >
+              {msg.content}
             </div>
           </div>
-
-          <div className="mt-3 bg-[#273041] rounded-md border border-[var(--border)] h-40 flex items-center justify-center text-[#9AA3AE]">
-            <div className="text-center">
-              <div className="mb-2">📈</div>
-              <p>Latency over time (placeholder)</p>
-            </div>
-          </div>
-
-          <div className="mt-4 p-3 bg-[#273041] rounded-md border border-[var(--border)]">
-            <h4 className="text-sm font-medium text-white">Potential Issue Detected</h4>
-            <p className="mt-1 text-sm text-[#d1d5db]">
-              The latency spikes coincide with deployment #3421 to the checkout service.
-              This version introduced changes to the payment processing logic.
-            </p>
-          </div>
-        </MessageBubble>
+        ))}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 'use client';
 
 import { RefreshCcw, Clock } from 'lucide-react';
+import { useThreadContext } from '@/lib/useThreadContext';
 
 const BORDER: Record<string, string> = {
   amber: 'border-amber-800/50',
@@ -16,6 +17,8 @@ const BADGE_TEXT: Record<string, string> = {
 };
 
 export function InsightPanel() {
+  const { sendQuery } = useThreadContext();
+
   const items = [
     {
       title: 'High API Latency',
@@ -30,6 +33,12 @@ export function InsightPanel() {
       color: 'rose',
     },
   ] as const;
+
+  const suggested = [
+    'Show error rate by service',
+    'Compare CPU usage before/after deploy',
+    'Find anomalous payment transactions',
+  ];
 
   return (
     <div className="p-4">
@@ -64,9 +73,7 @@ export function InsightPanel() {
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <h4 className="text-sm font-medium text-white mb-1">
-                    {it.title}
-                  </h4>
+                  <h4 className="text-sm font-medium text-white mb-1">{it.title}</h4>
                   <p className="text-xs text-[#9AA3AE]">{it.sub}</p>
                 </div>
                 <span
@@ -90,14 +97,11 @@ export function InsightPanel() {
           Suggested Queries
         </h3>
         <div className="space-y-2">
-          {[
-            'Show error rate by service',
-            'Compare CPU usage before/after deploy',
-            'Find anomalous payment transactions',
-          ].map((q) => (
+          {suggested.map((q) => (
             <button
               key={q}
-              className="w-full text-left p-2 text-sm bg-[#1e2530] hover:bg-[#273041] rounded-md border border-[var(--border)]"
+              onClick={() => sendQuery(q)}
+              className="w-full text-left p-2 text-sm bg-[#1e2530] hover:bg-[#273041] rounded-md border border-[var(--border)] transition-all duration-150"
             >
               {q}
             </button>
@@ -119,9 +123,7 @@ export function InsightPanel() {
             >
               <div className="flex items-center justify-between">
                 <span className="group-hover:text-brand">{d}</span>
-                <span className="text-[#9AA3AE] group-hover:text-brand">
-                  ↗
-                </span>
+                <span className="text-[#9AA3AE] group-hover:text-brand">↗</span>
               </div>
               <div className="mt-1 text-xs text-[#9AA3AE]">Sample details</div>
             </a>
@@ -131,3 +133,4 @@ export function InsightPanel() {
     </div>
   );
 }
+

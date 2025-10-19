@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import { ThreadProvider } from '@/lib/useThreadContext';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} min-h-screen flex flex-col`}>
-        {children}
+        <ThreadProvider>
+          {children}
+        </ThreadProvider>
       </body>
     </html>
   );
