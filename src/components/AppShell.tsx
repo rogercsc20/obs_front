@@ -21,20 +21,13 @@ export function AppShell() {
         <div className="flex items-center gap-4">
           <div className="flex items-center">
             <div className="w-7 h-7 flex items-center justify-center text-brand">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <circle cx="12" cy="12" r="4" />
-                <line x1="21.17" y1="8" x2="4.83" y2="8" />
-                <line x1="21.17" y1="16" x2="4.83" y2="16" />
-                <line x1="12" y1="21.17" x2="12" y2="2.83" />
-              </svg>
+              <div className="w-7 h-7 flex items-center justify-center rounded-full bg-[var(--brand)] overflow-hidden">
+                <img
+                  src="/claudia_logo_nt_white.png"
+                  alt="ClaudIA logo"
+                  className="w-5 h-5 object-contain"
+                />
+              </div>
             </div>
             <span className="ml-2 font-semibold text-lg">claudIA</span>
           </div>
@@ -89,8 +82,14 @@ export function AppShell() {
         <section className="relative flex flex-col flex-1 min-h-0 overflow-hidden">
           {isLandingState ? (
             // -- LANDING: centered welcome and prompt bar --
-            <div className="flex flex-col items-center justify-center h-full w-full px-0">
+            <div className="flex flex-col items-center justify-center h-full w-full px-4 text-center">
               <div className="w-full flex flex-col items-center gap-6">
+                {/* LOGO */}
+                <img
+                  src="/claudia_logo.png"
+                  alt="ClaudIA logo"
+                  className="w-24 md:w-32 lg:w-36 h-auto mb-4 opacity-90 drop-shadow-[0_0_12px_rgba(0,71,171,0.3)]"
+                />
                 <div className="text-center">
                   <h1 className="text-4xl font-semibold text-white mb-3">
                     Hey Adrian, can I help you troubleshoot?
@@ -109,7 +108,7 @@ export function AppShell() {
               <div className="flex-1 min-h-0 overflow-y-auto chat-scroll px-0 pt-6 flex flex-col bg-transparent pb-28">
                 <ChatThread />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 pb-6 flex justify-center bg-gradient-to-t from-[#101116]/80 to-transparent pointer-events-none z-20">
+              <div className="absolute bottom-0 left-0 right-0 pb-6 flex justify-center bg-gradient-to-t from-[#0c0d11]/95 to-t|ransparent pointer-events-none z-20">
                 <div className="w-full px-6 pointer-events-auto">
                   <PromptBar />
                 </div>

@@ -16,9 +16,9 @@ export function ChatThread() {
   return (
     <div
       ref={scrollRef}
-      className="chat-scroll overflow-y-auto flex-1 px-4 pt-6 flex flex-col items-center bg-transparent"
+      className="chat-scroll flex-1 h-full overflow-y-auto px-64 pb-20 pt-12 flex flex-col items-center"
     >
-      <div className="w-full flex flex-col gap-2 pb-12">
+      <div className="w-full flex flex-col gap-4 pb-12">
         {messages.map((msg, idx) => (
           <MessageBubble key={idx} role={msg.role} time={msg.time}>
             {msg.content}

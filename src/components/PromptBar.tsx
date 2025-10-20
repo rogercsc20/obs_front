@@ -43,7 +43,7 @@ export default function PromptBar() {
         autoFocus
       />
       <button
-        className="bg-[#4e88ff] hover:bg-[#3370e1] text-white font-medium px-4 py-2 rounded-md transition-all duration-150"
+        className="bg-[var(--brand)] text-white font-medium px-4 py-2 rounded-md transition-all duration-300 shadow-[0_0_10px_rgba(0,71,171,0.3)] hover:shadow-[0_0_20px_rgba(0,71,171,0.6)] hover:scale-[1.02] disabled:opacity-50"
         onClick={handleSend}
         disabled={loading}
       >
